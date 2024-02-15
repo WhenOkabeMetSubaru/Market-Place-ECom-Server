@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+  
+  
+</head>
+<style>
+.outercontainer {
+    padding:40px;
+    width:800px;
+}
+
+.tax-title {
+    font-size:large;
+    font-weight: 700;
+    margin-right: 20px;
+    white-space: nowrap;
+}
+
+.top-row-items{
+    display: flex;
+    font-weight:550;
+    column-gap: 20px;
+    font-size: 12px;
+}
+
+.top-row-subitems{
+    display:flex;
+    column-gap: 5px;
+}
+
+.top-row-right-element {
+    font-weight: 700;
+}
+
+.info-row-items {
+    margin-top: 20px;
+    display:flex;
+    column-gap: 20px;
+}
+
+.second-row-element {
+    width:30%;
+    font-size: 13px;
+}
+
+.main-row-items {
+    margin:15px 2px 15px 2px;
+    border:1.5px solid black;
+}
+
+.main-row1{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size:13px;
+    border-bottom: 1px solid black;
+}
+
+.main-row1-item1 {
+    width:20%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-row1-item2 {
+    width: 20%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-row1-item3 {
+    width: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-row1-item4 {
+    width: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-row1-item5 {
+    width: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-row1-item6 {
+    width: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-row1-item7{
+    width: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-row1-item8 {
+    width: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-row2 {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    font-weight:400;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 2px;
+}
+
+.main-row3 {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 2px;
+    border-bottom: 1px solid black;
+}
+
+.main-row4 {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    font-weight: 400;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.main-row4-quantity{
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.top-row-left-element {
+    white-space: nowrap;
+}
+
+p {margin:0}
+
+h5 { margin:0}
+
+</style>
+<body>
+    <section class='outercontainer'>
+        <div class='top-row-items'>
+            <p class='tax-title'>Tax Invoice</p>
+            <div>
+                <span class='top-row-subitems'>
+                    <p class="top-row-left-element">Order No:</p>
+                    <p class='top-row-right-element'>DFSDFDSF254</p>
+                </span>
+                <span class='top-row-subitems'>
+                    <p class="top-row-left-element">Order Date:</p>
+                    <p><%= order.created.toString().substring(0,10) %></p>
+                </span>
+            </div>
+            <div>
+                <span class='top-row-subitems'>
+                    <p class="top-row-left-element">Invoice No:</p>
+                    <p>DFSDFDSF254</p>
+                </span>
+                <span class='top-row-subitems'>
+                    <p class="top-row-left-element">Invoice Date:</p>
+                    <p><%= order.created.toString().substring(0,10) %></p>
+                </span>
+            </div>
+            <div>
+                <span class='top-row-subitems'>
+                    <p class="top-row-left-element">GST IN:</p>
+                    <p>DFSDFDSF254</p>
+                </span>
+                <span class='top-row-subitems'>
+                    <p class="top-row-left-element">PAN:</p>
+                    <p>BD484JDFL</p>
+                </span>
+            </div>
+        </div>
+        <div class='info-row-items'>
+            <div class='second-row-element'>
+                <h3>Sold By</h3>
+                <h5><%= shop.name %></h5>
+                <p><%= shop.address %>
+                </p>
+            </div>
+            <div class='second-row-element'>
+                <h3>Shipping Address</h3>
+                <h5><%= order.customer_name %></h5>
+                <p>
+                    <%= order.delivery_address.street %>
+                        <br />
+                        <%= order.delivery_address.city%>
+                            <br />
+                            <%= order.delivery_address.city%>
+                                <%= order.delivery_address.zipcode%>
+                </p>
+            </div>
+            <div class='second-row-element'>
+                <h3>Billing Address</h3>
+                <h5>
+                    <%= order.customer_name %>
+                </h5>
+                <p>
+                    <%= order.delivery_address.street %>
+                    <br/>
+                    <%= order.delivery_address.city%>
+                    <br/>
+                    <%= order.delivery_address.city%> <%= order.delivery_address.zipcode%>
+                </p>
+            </div>
+        </div>
+    
+        <div class='main-row-items'>
+            <div class='main-row1'>
+                <div class='main-row1-item1'>
+                    <p>Product</p>
+                </div>
+                <div class='main-row1-item2'>
+                    <p>Description</p>
+                </div>
+                <div class='main-row1-item3'>
+                    <p>Quantity</p>
+                </div>
+                <div class='main-row1-item4'>
+                    <p>Gross Amount</p>
+                </div>
+                <div class='main-row1-item5'>
+                    <p>Discount</p>
+                </div>
+                <div class='main-row1-item6'>
+                    <p>Tax Value</p>
+                </div>
+                <div class='main-row1-item7'>
+                    <p>IGST</p>
+                </div>
+                <div class='main-row1-item8'>
+                    <p>Total</p>
+                </div>
+    
+            </div>
+            <div class='main-row2'>
+                <div class='main-row1-item1'>
+                    <p><%= order.products.product.name %>
+                    </p>
+                </div>
+                <div class='main-row1-item2'>
+                    <p>HSN: 8516 | IGST: 18%</p>
+                </div>
+                <div class='main-row1-item3'>
+                    <p>1</p>
+                </div>
+                <div class='main-row1-item4'>
+                    <p>0</p>
+                </div>
+                <div class='main-row1-item5'>
+                    <p>0</p>
+                </div>
+                <div class='main-row1-item6'>
+                    <p><%= order.products.product.sellingprice %></p>
+                </div>
+                <div class='main-row1-item7'>
+                    <p>0</p>
+                </div>
+                <div class='main-row1-item8'>
+                    <p><%= order.products.product.sellingprice %></p>
+                </div>
+    
+            </div>
+            <div class='main-row3'>
+                <div class='main-row1-item1'>
+    
+                </div>
+                <div class='main-row1-item2'>
+                    <p>Shipping and Handling Charges</p>
+                </div>
+                <div class='main-row1-item3'>
+                    <p>1</p>
+                </div>
+                <div class='main-row1-item4'>
+                    <p>0.00</p>
+                </div>
+                <div class='main-row1-item5'>
+                    <p>0</p>
+                </div>
+                <div class='main-row1-item6'>
+                    <p>0.00</p>
+                </div>
+                <div class='main-row1-item7'>
+                    <p>0.00</p>
+                </div>
+                <div class='main-row1-item8'>
+                    <p>0.00</p>
+                </div>
+    
+            </div>
+            <div class='main-row4'>
+                <p class='main-row4-quantity'>TOTAL QTY : <%= order.products.quantity %></p>
+                <div>
+                    <p class='main-row4-quantity'>TOTAL PRICE:<%= order.total %></p>
+                    <p>All Values are in INR</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
