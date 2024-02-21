@@ -229,11 +229,12 @@ const getAllProducts = async (req,res) => {
     }
 }
 
-const getProductByID = async (req,res) => {
+const getProductByIDUserSide = async (req,res) => {
   
     try {
 
-        let productDetails = await Product.findById(req.params.productId);
+      
+        let productDetails = await Product.findById(req.params.productId).populate('shop');
         if (!productDetails) {
             return res.status(404).json({
                 status: true,
@@ -354,8 +355,38 @@ const addProductReviewAndRating= async (_,args,context)=>{
     }
 }
 
+const searchProductHomeScreen  = async(req,res)=>{
+   
+    try {
+     
+        const regexItem = new RegExp(req.params.name)
+        let productDetails = await Product.find({name:{$regex:regexItem}}).limit(10)
+
+        if(!productDetails?.length>0){
+            return res.status(404).json({
+                status:true,
+                info:"No Products Found"
+            })
+        }
+
+
+        return res.json({
+            status:false,
+            info:"Product Found",
+            data:productDetails
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            status:true,
+            info:"Some Unknown error has occurred"
+        })
+    }
+}
+
 module.exports = {
-    getProductByID,
+    getProductByIDUserSide,
     addNewProduct
     , getAllProductsByShop,
     updateProductByID,
@@ -364,5 +395,6 @@ module.exports = {
     updateProductStatus,
     getAllProducts,
     getProductsByPrice,
-    addProductReviewAndRating
+    addProductReviewAndRating,
+    searchProductHomeScreen
 };

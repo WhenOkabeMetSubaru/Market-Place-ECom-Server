@@ -10,12 +10,14 @@ const ProductCtrlGlobal = require('../controllers/product/product.controller')
 
 const Router = require('express').Router();
 
+Router.route('/v1/products/search/home/:name')
+    .get(ProductCtrlGlobal.searchProductHomeScreen)
 
 Router.route('/v1/products/home')
     .get(ProductCtrlGlobal.getAllProducts)
 
 Router.route('/v1/products/:productId')
-    .get(ProductCtrlGlobal.getProductByID)
+    .get(ProductCtrlGlobal.getProductByIDUserSide)
 
 Router.route('/v1/shop/:shopId/products/add')
     .post(AuthCtrlGlobal.requireSignin,UserCtrlGlobal.getUserByTokenPass,ProductCtrlGlobal.addNewProduct)
@@ -24,9 +26,9 @@ Router.route('/v1/shop/:shopId/products')
     .get(AuthCtrlGlobal.requireSignin,UserCtrlGlobal.getUserByTokenPass,ProductCtrlGlobal.getAllProductsByShop)
 
 Router.route('/v1/:adminId/products')
-    .get(AdminAuthCtrl.requireSignin,AdminAuthCtrl.hasAuthorization,AuthCtrl.getAdminCheck,ProductCtrl.getAllProductsByAdmin)
+    .get(AdminAuthCtrl.requireSignin,AuthCtrl.getAdminCheck,ProductCtrl.getAllProductsByAdmin)
 
-Router.route('/v1/products/:productId')
+Router.route('/v1/products/:productId/admin')
     .get(AdminAuthCtrl.requireSignin,AdminAuthCtrl.hasAuthorization,ProductCtrl.getProductByID)
 
 Router.route('/v1/:adminId/:shopId/products')
@@ -38,7 +40,6 @@ Router.route('/v1/:adminId/user/:userId/products')
 
 
 Router.param('adminId',AuthCtrl.getAdminByID)
-Router.param('productId',ProductCtrl.getProductByID);
 Router.param('shopId',ShopCtrl.getShopByIDAdmin)
 Router.param('userId',UserCtrl.getUserByIDAdmin)
 

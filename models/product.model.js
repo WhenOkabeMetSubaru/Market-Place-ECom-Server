@@ -13,8 +13,13 @@ const ProductSchema = mongoose.Schema({
     images:[{
         type:String
     }],
-    category:{
-        type:String
+    primary_category:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Category"
+    },
+    secondary_category:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Category"
     },
     quantity:{
         type:Number,
@@ -154,6 +159,15 @@ const ProductSchema = mongoose.Schema({
         type:String,
         default:'1'
     },
+    specifications:[
+        {
+            name:String,
+            info:{
+                type:String,
+                trim:true
+            }
+        }
+    ],
     color:{
         type:String
     },

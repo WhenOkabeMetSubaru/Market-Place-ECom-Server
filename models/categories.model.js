@@ -7,6 +7,8 @@ const CategorySchema = new mongoose.Schema({
         trim:true
     },
     category_type:{
+        enum:['primary','secondary'],
+        default:'primary',
         type:String
     },
     image:{

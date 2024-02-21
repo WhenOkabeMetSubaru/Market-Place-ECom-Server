@@ -59,26 +59,8 @@ const OrderSchema = new mongoose.Schema({
         type:CartSchema
     },
     delivery_address: {
-        street: {
-            type: String,
-            required: 'Street is required'
-        },
-        city: {
-            type: String,
-            required: 'City is required'
-        },
-        state: {
-            type: String,
-            required: 'State is required'
-        },
-        zipcode: {
-            type: String,
-            required: 'Zip code is required'
-        },
-        country: {
-            type: String,
-            required: 'Country is required'
-        }
+        type:mongoose.Schema.ObjectId,
+        ref:"Address"
     },
     order_type: {
         type: String

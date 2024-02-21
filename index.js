@@ -1,5 +1,8 @@
+const dotenv = require('dotenv').config()
 const express = require('express');
+
 const connectToMongo = require('./db');
+
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -8,7 +11,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const http = require('http');
 const multer = require('multer');
-const dotenv = require('dotenv').config()
 const path = require('path')
 
 // const UserRoutes = require('./routes/userRoutes');
@@ -18,7 +20,7 @@ connectToMongo();
 
 
 const app = express();
-const PORT = 4000;
+
 app.set('views', path.join(__dirname, '/views'))
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
@@ -100,8 +102,8 @@ const securedServer = http.createServer(app);
 
 
 
-securedServer.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`)
+securedServer.listen(process.env.PORT, () => {
+    console.log(`Server working at http://localhost:${process.env.PORT}`)
    
 })
 

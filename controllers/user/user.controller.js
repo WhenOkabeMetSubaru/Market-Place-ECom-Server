@@ -269,7 +269,7 @@ const getPdfFromHTML = async(req,res)=>{
 
         // res.render("invoice",{invoice:{"red":2}})
 
-        const orderDetails = await Order.findById({_id:req.params.orderId}).populate(["products.product","ordered_by"]);
+        const orderDetails = await Order.findById({_id:req.params.orderId}).populate(["products.product","ordered_by","delivery_address"]);
         const shopDetails = await Shop.findById({_id:orderDetails?.products?.product?.shop});
 
         ejs.renderFile("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\invoice.ejs",{order:orderDetails,user:orderDetails?.ordered_by,shop:shopDetails},async(err,str)=>{
@@ -394,7 +394,7 @@ const deleteAddressByUser = async (req, res) =>
     try
     {
 
-        let result = await Address.findByIdAndDelete({ _id: req.params.addressId }, req.body, { new: true })
+        let result = await Address.findByIdAndDelete({ _id: req.params.addressId },{ new: true })
 
 
         return res.json({

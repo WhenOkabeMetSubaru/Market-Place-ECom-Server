@@ -255,7 +255,7 @@ const getOrderByIDUser = async(req,res)=>{
     }
     try {
         
-        let orderDetails = await Order.findById({_id:req.params.orderId}).populate("products.product").exec();
+        let orderDetails = await Order.findById({ _id: req.params.orderId }).populate(["products.product","delivery_address"]).exec();
 
         if(!orderDetails){
             return res.status(404).json({

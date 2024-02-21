@@ -209,12 +209,12 @@ h5 { margin:0}
                 <h3>Shipping Address</h3>
                 <h5><%= order.customer_name %></h5>
                 <p>
-                    <%= order.delivery_address.street %>
+                    <%= order.delivery_address.address %>
                         <br />
                         <%= order.delivery_address.city%>
                             <br />
                             <%= order.delivery_address.city%>
-                                <%= order.delivery_address.zipcode%>
+                                <%= order.delivery_address.pincode%>
                 </p>
             </div>
             <div class='second-row-element'>
@@ -223,11 +223,11 @@ h5 { margin:0}
                     <%= order.customer_name %>
                 </h5>
                 <p>
-                    <%= order.delivery_address.street %>
+                    <%= order.delivery_address.address %>
                     <br/>
                     <%= order.delivery_address.city%>
                     <br/>
-                    <%= order.delivery_address.city%> <%= order.delivery_address.zipcode%>
+                    <%= order.delivery_address.city%> <%= order.delivery_address.pincode%>
                 </p>
             </div>
         </div>
