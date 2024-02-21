@@ -16,6 +16,7 @@ const path = require('path')
 // const UserRoutes = require('./routes/userRoutes');
 // const AuthRoutes = require('./routes/authRoutes');
 // const CourseRoutes = require('./routes/courseRoutes');
+const PORT = process.env.PORT || 4000;
 connectToMongo();
 
 
@@ -102,8 +103,8 @@ const securedServer = http.createServer(app);
 
 
 
-securedServer.listen(process.env.PORT, () => {
-    console.log(`Server working at http://localhost:${process.env.PORT}`)
+securedServer.listen(PORT, () => {
+    console.log(`Server working at http://localhost:${PORT}`)
    
 })
 
