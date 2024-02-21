@@ -4,14 +4,14 @@ const errorHandler = require('../../helpers/errorHandler');
 const jwt = require('jsonwebtoken')
 const ejs = require('ejs')
 const path = require('path');
-const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
+// const PuppeteerHTMLPDF = require('puppeteer-html-pdf');
 const hbs = require('handlebars');
 const Order =require('../../models/order.model')
 const Shop = require('../../models/shop.model')
 const Address = require("../../models/address.model")
 
-const htmlPDF = new PuppeteerHTMLPDF();
-htmlPDF.setOptions({ format: 'A4' });
+// const htmlPDF = new PuppeteerHTMLPDF();
+// htmlPDF.setOptions({ format: 'A4' });
 
 const addNewUser = async (req,res) => {
 
@@ -260,67 +260,67 @@ const getUserByTokenPass = async (req, res,next) =>
 }
 
 const getPdfFromHTML = async(req,res)=>{
-    try {
-        // let pathnoi = path.join(__dirname,"../../templates/invoice.html");
-        // console.log(pathnoi)
-        // res.sendFile(pathnoi)
+    // try {
+    //     // let pathnoi = path.join(__dirname,"../../templates/invoice.html");
+    //     // console.log(pathnoi)
+    //     // res.sendFile(pathnoi)
       
-        // return res.render("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\invoice.ejs")
+    //     // return res.render("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\invoice.ejs")
 
-        // res.render("invoice",{invoice:{"red":2}})
+    //     // res.render("invoice",{invoice:{"red":2}})
 
-        const orderDetails = await Order.findById({_id:req.params.orderId}).populate(["products.product","ordered_by","delivery_address"]);
-        const shopDetails = await Shop.findById({_id:orderDetails?.products?.product?.shop});
+    //     const orderDetails = await Order.findById({_id:req.params.orderId}).populate(["products.product","ordered_by","delivery_address"]);
+    //     const shopDetails = await Shop.findById({_id:orderDetails?.products?.product?.shop});
 
-        ejs.renderFile("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\invoice.ejs",{order:orderDetails,user:orderDetails?.ordered_by,shop:shopDetails},async(err,str)=>{
-            if(err){
-                return res.send(err);
-            }
+    //     ejs.renderFile("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\invoice.ejs",{order:orderDetails,user:orderDetails?.ordered_by,shop:shopDetails},async(err,str)=>{
+    //         if(err){
+    //             return res.send(err);
+    //         }
 
-            htmlPDF.setOptions({format:"A4"})
+    //         htmlPDF.setOptions({format:"A4"})
 
-            const pdfDoc = await htmlPDF.create(str);
-            const filePath = `C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\`+orderDetails?._id + ".pdf";
-            await htmlPDF.writeFile(pdfDoc, filePath);
+    //         const pdfDoc = await htmlPDF.create(str);
+    //         const filePath = `C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\`+orderDetails?._id + ".pdf";
+    //         await htmlPDF.writeFile(pdfDoc, filePath);
            
-            return res.download(filePath,()=>{})
+    //         return res.download(filePath,()=>{})
 
-        })
+    //     })
 
-        // const pdfData = {
-        //     invoiceItems: [
-        //         { item: 'Website Design', amount: 5000 },
-        //         { item: 'Hosting (3 months)', amount: 2000 },
-        //         { item: 'Domain (1 year)', amount: 1000 },
-        //     ],
-        //     invoiceData: {
-        //         invoice_id: 123,
-        //         transaction_id: 1234567,
-        //         payment_method: 'Paypal',
-        //         creation_date: '04-05-1993',
-        //         total_amount: 141.5,
-        //     },
-        //     baseUrl: 'https://ultimateakash.com'
-        // }
-        // const html = await htmlPDF.readFile("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\"+ 'invoiceNew.html', 'utf8');
-        // const template = hbs.compile(html);
-        // const content = template(pdfData);
+    //     // const pdfData = {
+    //     //     invoiceItems: [
+    //     //         { item: 'Website Design', amount: 5000 },
+    //     //         { item: 'Hosting (3 months)', amount: 2000 },
+    //     //         { item: 'Domain (1 year)', amount: 1000 },
+    //     //     ],
+    //     //     invoiceData: {
+    //     //         invoice_id: 123,
+    //     //         transaction_id: 1234567,
+    //     //         payment_method: 'Paypal',
+    //     //         creation_date: '04-05-1993',
+    //     //         total_amount: 141.5,
+    //     //     },
+    //     //     baseUrl: 'https://ultimateakash.com'
+    //     // }
+    //     // const html = await htmlPDF.readFile("C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\"+ 'invoiceNew.html', 'utf8');
+    //     // const template = hbs.compile(html);
+    //     // const content = template(pdfData);
 
-        // const pdfBuffer = await htmlPDF.create(content);
-        // const filePath = `C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\sample.pdf`
-        // await htmlPDF.writeFile(pdfBuffer, filePath);
+    //     // const pdfBuffer = await htmlPDF.create(content);
+    //     // const filePath = `C:\\Users\\hardi\\OneDrive\\Documents\\Projects\\MarketPlace\\server\\views\\sample.pdf`
+    //     // await htmlPDF.writeFile(pdfBuffer, filePath);
     
-        // return res.download(filePath,(err)=>{
-        //     console.log(err)
-        // })
+    //     // return res.download(filePath,(err)=>{
+    //     //     console.log(err)
+    //     // })
 
-    } catch (error) {
-        console.log(error)
-       return res.json({
-            status:false,
-            info:"failed"
-        })
-    }
+    // } catch (error) {
+    //     console.log(error)
+    //    return res.json({
+    //         status:false,
+    //         info:"failed"
+    //     })
+    // }
 }
 
 const addNewAddressForUser = async(req,res)=>{
